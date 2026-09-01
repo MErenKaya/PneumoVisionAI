@@ -1,0 +1,28 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PneumoVisionAI.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<ul class="navbar-nav flex-row align-items-center">
+   @if (SignInManager.IsSignedIn(User))
+{
+    @* Koyu navbar ile uyumlu soft gri (#cbd5e1) tonunda profil linki *@
+    <li class="nav-item">
+        <a class="nav-link fw-medium px-3" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage" style="color: #cbd5e1 !important;">
+            <i class="fas fa-user-circle me-1 opacity-75"></i> Merhaba @UserManager.GetUserName(User)!
+        </a>
+    </li>
+    @* Koyu navbar üzerinde kendini belli eden tatlı bir soft kırmızı (#f87171) Çıkış Yap butonu *@
+    <li class="nav-item">
+        <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+            <button type="submit" class="nav-link btn btn-link fw-medium border-0 py-0 ms-2" style="color: #f87171 !important; background: none;">
+                <i class="fas fa-sign-out-alt me-1"></i> Çıkış Yap
+            </button>
+        </form>
+    </li>
+}
+else
+{
+    @* 🎯 Giriş yapmayanlar için burayı tamamen boşalttık, yukarıda hiçbir şey tekrar etmeyecek *@
+}
+</ul>

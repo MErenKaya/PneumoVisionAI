@@ -1,0 +1,54 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using PneumoVisionAI.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+
+<ul class="nav nav-pills flex-column gap-2">
+    <li class="nav-item">
+        <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center @ManageNavPages.IndexNavClass(ViewContext)" id="profile" asp-page="./Index">
+            <i class="fas fa-user-circle me-2"></i> Profil Bilgileri
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center @ManageNavPages.ChangePasswordNavClass(ViewContext)" id="change-password" asp-page="./ChangePassword">
+            <i class="fas fa-key me-2"></i> Şifre Değiştir
+        </a>
+    </li>
+    @if (hasExternalLogins)
+    {
+        <li class="nav-item">
+            <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center @ManageNavPages.ExternalLoginsNavClass(ViewContext)" id="external-logins" asp-page="./ExternalLogins">
+                <i class="fas fa-share-alt me-2"></i> Dış Bağlantılar
+            </a>
+        </li>
+    }
+    <li class="nav-item">
+        <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center @ManageNavPages.TwoFactorAuthenticationNavClass(ViewContext)" id="two-factor" asp-page="./TwoFactorAuthentication">
+            <i class="fas fa-shield-alt me-2"></i> İki Adımlı Doğrulama
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link rounded-3 px-3 py-2 d-flex align-items-center @ManageNavPages.PersonalDataNavClass(ViewContext)" id="personal-data" asp-page="./PersonalData">
+            <i class="fas fa-user-shield me-2"></i> Kişisel Veriler
+        </a>
+    </li>
+</ul>
+
+<style>
+    .nav-pills .nav-link {
+        color: #475569;
+        transition: all 0.2s ease;
+        font-weight: 500;
+    }
+    .nav-pills .nav-link:hover {
+        background-color: #f1f5f9;
+        color: #0f172a;
+    }
+    .nav-pills .nav-link.active {
+        background-color: #0f172a !important;
+        color: #ffffff !important;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+    }
+</style>

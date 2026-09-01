@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MedAI</title>
+    <script type="importmap"></script>
+    
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    
+    @* --- GOOGLE FONTS (Inter & Plus Jakarta Sans) --- *@
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    @* --- EK KÜTÜPHANELER --- *@
+    <!-- FontAwesome İkonları İçin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <!-- Animate.css Animasyonları İçin -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/PneumoVisionAI.styles.css" asp-append-version="true" />
+</head>
+<body>
+   <header>
+    @* 🎯 bg-white ve navbar-light kaldırıldı; yerine navbar-dark ve %85 opaklıkta siber slate rengi çakıldı *@
+    <nav class="navbar navbar-expand-lg navbar-dark border-bottom shadow-sm mb-4 py-3 sticky-top" 
+         style="background: rgba(15, 23, 42, 0.85) !important; backdrop-filter: blur(12px) !important; -webkit-backdrop-filter: blur(12px) !important; border-color: rgba(255, 255, 255, 0.08) !important;">
+        <div class="container-fluid px-4">
+            
+            @* 🎯 Logo Alanı: text-dark yerine text-white getirilerek görünürlük sağlandı *@
+            <a class="navbar-brand fw-bold d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index" 
+               style="font-family: 'Plus Jakarta Sans', sans-serif; letter-spacing: -0.5px; color: #3b82f6 !important;">
+                <i class="fas fa-brain me-2" style="color: #3b82f6;"></i>
+                Final<span class="text-white">Projesi</span>
+            </a>
+            
+            @* Mobil Menü Üç Çizgi Butonu (Karanlıkta beyaz görünmesi için ayarlandı) *@
+            <button class="navbar-toggler border-0 text-white" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="mainNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-3">
+                    <li class="nav-item">
+                        @* 🎯 text-secondary yerine gözü yormayan soft açık gri (#cbd5e1) tona geçildi *@
+                        <a class="nav-link fw-medium px-3 text-hover-glow" asp-area="" asp-controller="Home" asp-action="Index" style="color: #cbd5e1 !important;">
+                            <i class="fas fa-home me-1 small opacity-75"></i> Ana Sayfa
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link fw-medium px-3 text-hover-glow" asp-area="" asp-controller="Home" asp-action="Privacy" style="color: #cbd5e1 !important;">
+                            <i class="fas fa-shield-alt me-1 small opacity-75"></i> Gizlilik
+                        </a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <partial name="_LoginPartial" />
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+    <div class="container">
+        <main role="main" class="pb-5">
+            @RenderBody()
+        </main>
+    </div>
+
+    @* Alt Bilgi: Tam beyaz yerine hafif Slate tonlarında kırılmış, kurumsal bir footer *@
+  <footer class="border-top footer text-white-50 py-2 mt-auto bg-transparent" style="border-color: rgba(255, 255, 255, 0.1) !important;">
+    <div class="container d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2" style="font-size: 0.8rem; opacity: 0.75;">
+        
+        @* Sol Taraf - Telif Metni *@
+        <span>&copy; 2026 - <span class="fw-semibold text-light">PneumoVisionAI</span> | Tüm Hakları Saklıdır.</span>
+        
+        @* Sağ Taraf - Linkler *@
+        <div class="d-flex gap-3">
+            <a asp-area="" asp-controller="Home" asp-action="Privacy" class="text-white-50 text-decoration-none hover-underline">Gizlilik Politikası</a>
+            <span class="text-muted">|</span>
+            <span class="fw-medium" style="color: #3b82f6;"><i class="fas fa-laptop-code me-1"></i> Teşhis Sistemi</span>
+        </div>
+        
+    </div>
+</footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

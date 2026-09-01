@@ -1,0 +1,16 @@
+# Visual Studio / .NET
+bin/
+obj/
+.vs/
+*.user
+*.suo
+
+# Python / Anaconda / FastAPI
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+........................
+*.mdf
+*.ldf

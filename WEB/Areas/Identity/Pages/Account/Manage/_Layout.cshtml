@@ -1,0 +1,91 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+    {
+        Layout = parentLayout.ToString();
+    }
+    else
+    {
+        Layout = "/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="profile-bg-wrapper py-5">
+    <div class="container">
+        <!-- Üst Başlık Alanı -->
+        <div class="mb-4 animate__animated animate__fadeIn ms-2">
+            <h2 class="fw-bold text-slate d-flex align-items-center mb-1 text-white">
+                <i class="fas fa-user-cog me-3 text-accent animate__pulse animate__infinite"></i>
+                Kullanıcı Kontrol Paneli
+            </h2>
+            <p class="text-slate-muted small mb-0">Sistem ayarlarınızı, model geçmişinizi ve profil güvenliğinizi bu alandan yönetebilirsiniz.</p>
+        </div>
+        
+        <div class="row g-4 mt-1">
+            <!-- Sol Menü Sütunu -->
+            <div class="col-lg-3 col-md-4 animate__animated animate__fadeInLeft">
+                <div class="card profile-sidebar-card border-0 shadow-lg rounded-4 p-3">
+                    <partial name="_ManageNav" />
+                </div>
+            </div>
+            
+            <!-- Sağ İçerik Sütunu -->
+            <div class="col-lg-9 col-md-8 animate__animated animate__fadeInRight">
+                <div class="card profile-content-card border-0 shadow-lg rounded-4 p-4 p-sm-5 min-vh-50">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+<style>
+    /* Profil Sayfasına Özel Dinamik Arka Plan */
+    .profile-bg-wrapper {
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        min-height: 85vh;
+        border-radius: 16px;
+        margin-top: 10px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Arka plana ince, teknolojik bir doku eklemek için (isteğe bağlı) */
+    .profile-bg-wrapper::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 0);
+        background-size: 24px 24px;
+        pointer-events: none;
+    }
+
+    /* Sol Menü Kartı */
+    .profile-sidebar-card {
+        background: rgba(30, 41, 59, 0.7) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    }
+
+    /* Sağ İçerik Kartı */
+    .profile-content-card {
+        background: rgba(255, 255, 255, 0.95) !important; /* Form elemanlarının rahat okunması için opak beyaz-gri */
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Metin Renk Düzenlemeleri */
+    .text-slate {
+        color: #f8fafc !important;
+    }
+    .text-slate-muted {
+        color: #94a3b8 !important;
+    }
+    .text-accent {
+        color: #3b82f6 !important;
+    }
+
+    .min-vh-50 {
+        min-height: 55vh;
+    }
+</style>

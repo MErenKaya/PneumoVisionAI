@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Analiz Sonuçları";
+    // 🎯 Sayfaya ana şablonu ve Bootstrap kütüphanelerini zorla yüklüyoruz:
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container my-5 animate__animated animate__fadeIn">
+    <div class="row g-4">
+        
+        @* 🖼️ Sol Taraf: Yüklenen Tıbbi Görüntü (Matris) Bölümü *@
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-lg p-3 h-100" 
+                 style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+                <h4 class="fw-bold text-white mb-3 px-2">
+                    <i class="fas fa-file-medical me-2" style="color: #3b82f6;"></i> İşlenen Matris
+                </h4>
+                <div class="rounded-3 overflow-hidden d-flex align-items-center justify-content-center bg-black" style="min-height: 400px; border: 1px solid rgba(255,255,255,0.05);">
+                    <img src="@ViewBag.ImageUrl" class="img-fluid" alt="Analiz Edilen Görüntü" style="max-height: 500px; object-fit: contain;" />
+                </div>
+            </div>
+        </div>
+
+        @* 🤖 Sağ Taraf: Yapay Zeka Rapor Kartı Bölümü *@
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-lg p-4 p-md-5 h-100" 
+                 style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+                
+                <div class="d-flex align-items-center justify-content-between mb-4 border-bottom pb-3" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                    <h3 class="fw-bold text-white m-0">
+                        <i class="fas fa-robot me-2" style="color: #3b82f6;"></i> Analiz Raporu
+                    </h3>
+                    <span class="badge bg-danger text-white px-3 py-2 rounded-pill fw-bold animate__animated animate__pulse animate__infinite">
+                        @ViewBag.Status
+                    </span>
+                </div>
+
+                @* Sonuç Metrikleri *@
+                <div class="mb-4">
+                    <label class="small uppercase fw-bold" style="color: #64748b; letter-spacing: 1px;">Saptanan Olası Patoloji</label>
+                    <h2 class="fw-bold mt-1" style="color: #ef4444 !important;">@ViewBag.DiseaseDetected</h2>
+                </div>
+
+                <div class="row g-3 my-4">
+                    <div class="col-6">
+                        <div class="p-3 rounded-3" style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="small d-block" style="color: #94a3b8;">Kesinlik Skoru (Confidence)</span>
+                            <span class="fs-4 fw-bold" style="color: #3b82f6 !important;">@ViewBag.Confidence</span>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="p-3 rounded-3" style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.05);">
+                            <span class="small d-block" style="color: #94a3b8;">Çıkarım Süresi (Inference)</span>
+                            <span class="fs-4 fw-bold text-light">@ViewBag.ProcessingTime</span>
+                        </div>
+                    </div>
+                </div>
+
+                @* Yasal Uyarı Metni *@
+                <p class="small mt-4" style="color: #94a3b8; line-height: 1.6;">
+                    <i class="fas fa-exclamation-triangle me-1 text-warning"></i> <strong>Yasal Uyarı:</strong> Bu çıktı yapay zeka modeli tarafından üretilmiş bir ön değerlendirmedir. Kesin teşhis ve tedavi planlaması için uzman hekim kontrolü zorunludur.
+                </p>
+
+                @* Aksiyon Butonları *@
+                <div class="d-flex gap-3 mt-5 pt-3 border-top" style="border-color: rgba(255, 255, 255, 0.08) !important;">
+                    <a href="/Diagnose" class="btn btn-outline-light rounded-pill px-4 py-2 fw-medium">
+                        <i class="fas fa-arrow-left me-2"></i> Yeni Analiz
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

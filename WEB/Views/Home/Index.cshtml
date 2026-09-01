@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Ana Sayfa";
+}
+
+@* 1. Hero / Karşılama Bölümü *@
+<div class="hero-section text-center text-white mb-5 p-4 p-sm-5 rounded-4 shadow-lg" 
+     style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+    
+    @* Eski koyu renk arkaplan overlay'ini şeffafa çekerek resmi görünür kıldık *@
+    <div class="hero-overlay" style="z-index: 1; background: transparent !important;"></div>
+    
+    <div class="container position-relative py-4" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                
+                @* Üst buton (Badge) alanını siber mavi şeffaf tona çektik *@
+                <span class="badge rounded-pill px-3 py-2 mb-4 fw-bold animate__animated animate__fadeInDown"
+                      style="background-color: rgba(59, 130, 246, 0.15) !important; color: #3b82f6 !important; border: 1px solid rgba(59, 130, 246, 0.3) !important;">
+                    <i class="fas fa-brain me-1"></i> Derin Öğrenme Tabanlı Tanı Sistemi
+                </span> 
+                
+                <h1 class="display-3 fw-bold mb-4 main-title animate__animated animate__fadeIn text-center text-white">
+                    Tıbbi Görüntüleri <span style="color: #3b82f6 !important;">Yapay Zeka</span> <span>ile Analiz Edin</span>
+                </h1>
+                
+                <p class="lead mb-5 animate__animated animate__fadeIn animate__delay-1s mx-auto" style="max-width: 750px; color: #cbd5e1 !important;">
+                    Eğitilmiş modelimiz, radyolojik görüntüleri saniyeler içinde inceleyerek olası anormallikleri ve hastalık bulgularını yüksek doğrulukla tespit etmenize yardımcı olur.
+                </p>
+                
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="animate__animated animate__zoomIn animate__delay-2s">
+                        <a href="/Diagnose" class="btn btn-lg px-5 py-3 rounded-pill fw-bold shadow text-white" style="background-color: #3b82f6 !important; border: none;">
+                            <i class="fas fa-upload me-2"></i> Görüntü Yükle ve Analiz Et
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-grid gap-3 d-sm-flex justify-content-sm-center animate__animated animate__zoomIn animate__delay-2s">
+                        <a href="/Identity/Account/Register" class="btn btn-lg px-5 py-3 rounded-pill fw-bold shadow text-white" style="background-color: #3b82f6 !important; border: none;">
+                            <i class="fas fa-user-plus me-2"></i> Hemen Kayıt Ol
+                        </a>
+                        <a href="/Identity/Account/Login" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                            <i class="fas fa-sign-in-alt me-2"></i> Giriş Yap
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@* 2. Özellikler Bölümü *@
+<div class="container my-5">
+    <div class="row g-4 text-center">
+        
+        @* Özellik 1 - Hızlı Analiz (Mavi Temalı) *@
+        <div class="col-md-4 animate__animated animate__fadeInUp">
+            @* 🎯 background ve blur özelliklerinin sonuna !important eklendi *@
+            <div class="card h-100 border-0 shadow-sm p-4 hover-lift" 
+                 style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+                
+                <div class="mx-auto mb-4 d-flex align-items-center justify-content-center" 
+                     style="background-color: rgba(59, 130, 246, 0.12); width: 65px; height: 65px; border-radius: 50%; border: 1px solid rgba(59, 130, 246, 0.25);">
+                    <i class="fas fa-bolt fa-2x" style="color: #3b82f6;"></i>
+                </div>
+                
+                <h4 class="fw-bold mb-2 text-white">Hızlı Analiz</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0;">Modelimiz, görüntüyü saniyeler içinde işleyerek anında ön değerlendirme sunar, teşhis sürecini hızlandırır.</p>
+            </div>
+        </div>
+        
+        @* Özellik 2 - Yüksek Doğruluk (Yeşil Temalı) *@
+        <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-1s">
+            @* 🎯 background ve blur özelliklerinin sonuna !important eklendi *@
+            <div class="card h-100 border-0 shadow-sm p-4 hover-lift" 
+                 style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+                
+                <div class="mx-auto mb-4 d-flex align-items-center justify-content-center" 
+                     style="background-color: rgba(34, 197, 94, 0.12); width: 65px; height: 65px; border-radius: 50%; border: 1px solid rgba(34, 197, 94, 0.25);">
+                    <i class="fas fa-bullseye fa-2x" style="color: #22c55e;"></i>
+                </div>
+                
+                <h4 class="fw-bold mb-2 text-white">Yüksek Doğruluk</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0;">Binlerce vakayla eğitilen model, anormallik tespiti ve sınıflandırmada güvenilir sonuçlar üretir.</p>
+            </div>
+        </div>
+        
+        @* Özellik 3 - Güvenli Veri (Kırmızı Temalı) *@
+        <div class="col-md-4 animate__animated animate__fadeInUp animate__delay-2s">
+            @* 🎯 background ve blur özelliklerinin sonuna !important eklendi *@
+            <div class="card h-100 border-0 shadow-sm p-4 hover-lift" 
+                 style="background: rgba(30, 41, 59, 0.65) !important; backdrop-filter: blur(8px) !important; -webkit-backdrop-filter: blur(8px) !important; border: 1px solid rgba(255, 255, 255, 0.05) !important;">
+                
+                <div class="mx-auto mb-4 d-flex align-items-center justify-content-center" 
+                     style="background-color: rgba(239, 68, 68, 0.12); width: 65px; height: 65px; border-radius: 50%; border: 1px solid rgba(239, 68, 68, 0.25);">
+                    <i class="fas fa-shield-alt fa-2x" style="color: #ef4444;"></i>
+                </div>
+                
+                <h4 class="fw-bold mb-2 text-white">Güvenli Veri</h4>
+                <p style="color: #94a3b8; font-size: 0.95rem; margin-bottom: 0;">Verileriniz ve yüklediğiniz görüntüler, KVKK uyumlu ve modern güvenlik standartlarına uygun şekilde işlenir.</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+@* 3. UYARI BÖLÜMÜ (Artık tamamen bağımsız ve her durumda görünür) *@
+<div class="container my-5 animate__animated animate__fadeIn">
+    <div class="bg-light-danger text-danger text-center py-4 rounded shadow-sm border border-danger-subtle">
+        <h5 class="fw-bold mb-2"><i class="fas fa-exclamation-triangle me-2"></i> ÖNEMLİ TIBBİ YASAL UYARI</h5>
+        <p class="mb-0 mx-auto px-3" style="max-width: 800px; font-size: 0.95rem;">
+            Bu sistem, bitirme projesi kapsamında geliştirilmiş bir <strong>araştırma prototipidir</strong>. Kesin tıbbi tanı veya tedavi önerisi koyamaz. Alınan sonuçlar mutlaka uzman bir hekim tarafından değerlendirilmelidir. Sistem, profesyonel tıbbi görüşün yerini almaz.
+        </p>
+    </div>
+</div>

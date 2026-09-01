@@ -1,0 +1,190 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Form elemanları ve buton odaklanma renkleri - Marka rengine (Medical Blue/Turkuaz) uyarlandı */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem var(--accent-color);
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    background-image: url('/images/site-bg.jpg');
+    /* Resmin ekranı tamamen kaplamasını sağlar */
+    background-size: cover;
+    /* Resmi ekrana ortalar */
+    background-position: center;
+    /* Sayfa aşağı kaysa bile resmin tekrar etmesini engeller */
+    background-repeat: no-repeat;
+    /* En kritik ayar: Sayfa kaydırılsa bile arka plan sabit kalır, harika bir derinlik hissi verir */
+    background-attachment: fixed;
+    /* Arka plan koyu olduğu için sitenin genel varsayılan yazı rengini açık gri/beyaz tonuna çekiyoruz */
+    color: #f8fafc !important;
+}
+
+.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+    color: var(--bs-secondary-color);
+    text-align: end;
+}
+
+.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
+    text-align: start;
+}
+
+/* --- GENEL TASARIM VE RENK MİMARİSİ --- */
+:root {
+    --primary-color: #0f172a; /* Slate 900 - Gece Mavisi / Koyu Lacivert */
+    --accent-color: #2563eb; /* Medikal Mavi - Güven veren ana aksan */
+    --teal-accent: #0d9488; /* İkincil Medikal Turkuaz */
+    --text-main: #1e293b; /* Slate 800 - Yumuşak Siyah (Gözü yormaz) */
+    --text-muted: #64748b; /* Slate 500 - Yardımcı Metin Rengi */
+    --light-muted: #cbd5e1;
+    --bg-main: #f8fafc; /* Slate 50 - Kırık Beyaz Ana Arka Plan */
+    --bg-light-primary: #f1f5f9;
+    --bg-light-success: #ecfdf5;
+    --bg-light-danger: #fef2f2;
+    /* Premium Yumuşak Gölgeler */
+    --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.05), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+}
+
+body {
+    background-color: var(--bg-main);
+    font-family: 'Inter', sans-serif; /* Okunabilirliği yüksek ana metin fontu */
+    color: var(--text-main);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Başlıklar İçin Özel Fütüristik Font Yapısı */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--primary-color);
+}
+
+/* Standart Bootstrap Kartlarını Temaya Uydurma */
+.card {
+    background-color: #ffffff !important;
+    border: 1px solid rgba(226, 232, 240, 0.8) !important;
+    box-shadow: var(--shadow-md) !important;
+}
+
+/* --- HERO BÖLÜMÜ --- */
+/* --- HERO BÖLÜMÜ (GÜNCEL & ESNEK) --- */
+.hero-section {
+    position: relative;
+    background-color: var(--primary-color);
+    background-image: url('/images/hero-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 75vh;
+    display: flex;
+    align-items: center; /* İçerik dikeyde tam ortalansın, kaymasın */
+    padding-top: 60px;
+    padding-bottom: 60px;
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.92);
+    z-index: -1;
+}
+
+/* Sıkışıp kayan ana başlığı kurtaralım */
+.main-title {
+    font-size: calc(2rem + 2vw) !important; /* Ekran boyutuna göre dinamik büyüsün */
+    line-height: 1.25 !important; /* Satır aralığını biraz açtık */
+    font-weight: 800;
+    /* 🎯 Ortalanmama sorununu çözen kritik eklemeler */
+    letter-spacing: 0px !important; /* Negatif kaymayı sıfırlayarak harflerin sola çekmesini engelledik */
+    text-align: center !important; /* Ortalamayı CSS seviyesinde kesinleştirdik */
+    display: block !important; /* Blok elementine çevirerek satırı tamamen kaplamasını sağladık */
+    width: 100% !important; /* Genişliği fulleyerek sağa-sola kaçışları bitirdik */
+}
+
+/* Alt açıklama metni */
+.hero-section p.lead {
+    font-size: calc(1rem + 0.3vw) !important;
+    line-height: 1.6 !important;
+    color: var(--light-muted) !important;
+}
+
+.text-accent {
+    color: var(--accent-color) !important;
+}
+
+.text-light-muted {
+    color: var(--light-muted);
+}
+/* --- BUTONLAR VE AKSENT --- */
+.btn-accent {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+    .btn-accent:hover {
+        background-color: #1d4ed8; /* Mavi tonu derinleştirildi */
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3); /* Düzeltildi: shadow kuralı box-shadow yapıldı */
+    }
+
+.btn-outline-light {
+    border-color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.9);
+}
+
+    .btn-outline-light:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+
+/* --- ÖZELLİK KARTLARI --- */
+.card.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .card.hover-lift:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04) !important;
+    }
+
+.icon-square {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+}
+
+.bg-light-primary {
+    background-color: var(--bg-light-primary);
+}
+
+.bg-light-success {
+    background-color: var(--bg-light-success);
+}
+
+.bg-light-danger {
+    background-color: var(--bg-light-danger);
+}
+
+

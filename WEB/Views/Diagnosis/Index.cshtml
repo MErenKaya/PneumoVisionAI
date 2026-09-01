@@ -1,0 +1,116 @@
+﻿@model WebApp.Controllers.PredictionResultModel
+@using System.Globalization
+@{
+    ViewData["Title"] = "Zatürre Teşhis Paneli";
+
+    string boxCss = Model?.Prediction switch
+    {
+        "PNEUMONIA" => "bg-light-danger border-danger",
+        "NORMAL" => "bg-light-success border-success",
+        "INCONCLUSIVE" => "bg-light border-warning",
+        _ => "bg-light border-secondary"
+    };
+
+    string badgeCss = Model?.Prediction switch
+    {
+        "PNEUMONIA" => "bg-danger",
+        "NORMAL" => "bg-success",
+        "INCONCLUSIVE" => "bg-warning text-dark",
+        _ => "bg-secondary"
+    };
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">PneumoVision AI - Röntgen & Odak Analiz Paneli</h4>
+                </div>
+                <div class="card-body">
+
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Error</div>
+                    }
+
+                    <form asp-action="Index" method="post" enctype="multipart/form-data" class="mb-4">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Chest X-Ray Fotoğrafı Yükleyin:</label>
+                            <input type="file" name="file" class="form-control" accept="image/*" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Analiz Et & Isı Haritası Üret</button>
+                    </form>
+
+                    @if (Model != null && Model.Success)
+                    {
+                        <hr />
+                        <div class="result-box p-3 rounded border @boxCss">
+                            <h5 class="fw-bold mb-3">Analiz ve Görselleştirme Sonucu</h5>
+
+                            <div class="row text-center mb-4">
+                                <div class="col-md-6 mb-3">
+                                    <div class="p-2 border bg-white rounded">
+                                        <h6 class="fw-bold text-secondary">Yüklenen Orijinal X-Ray</h6>
+                                        <img src="@ViewBag.UploadedImage" class="img-fluid rounded mt-2" style="max-height: 280px; object-fit: contain;" alt="Original X-Ray" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <div class="p-2 border bg-white rounded">
+                                        <h6 class="fw-bold text-danger">Grad-CAM Odak Bölgesi (Heatmap)</h6>
+                                        <img src="@Model.HeatmapBase64" class="img-fluid rounded mt-2" style="max-height: 280px; object-fit: contain;" alt="Grad-CAM Overlay" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="fs-5 mb-2">
+                                Teşhis:
+                                @if (Model.Prediction == "PNEUMONIA")
+                                {
+                                    <span class="badge @badgeCss fs-6">PNEUMONIA (Zatürre Tespit Edildi)</span>
+                                }
+                                else if (Model.Prediction == "NORMAL")
+                                {
+                                    <span class="badge @badgeCss fs-6">NORMAL (Ağır İltihap Yok)</span>
+                                }
+                                else
+                                {
+                                    <span class="badge @badgeCss fs-6">INCONCLUSIVE (Sınırda / Uzman İncelemesi Gerekli)</span>
+                                }
+                            </p>
+
+                            @if (Model.Prediction == "INCONCLUSIVE")
+                            {
+                                <div class="alert alert-warning p-2 small mb-3">
+                                    ⚠️ <strong>Klinik Uyarı:</strong> Model kararsızlık aralığında (%40 - %65) kalmıştır. Röntgen görüntüsünün bir radyoloji uzmanı tarafından incelenmesi önerilir.
+                                </div>
+                            }
+
+                            <p class="mb-1 fw-bold">Baskın Güven Oranı: %@Model.Confidence.ToString("F2")</p>
+
+                            <div class="mt-3">
+                                <small class="text-muted fw-bold">Pneumonia Olasılığı:</small>
+                                <div class="progress mb-2" style="height: 22px;">
+                                    <div class="progress-bar bg-danger fw-bold"
+                                         role="progressbar"
+                                         style="width: @Model.Probabilities.Pneumonia.ToString("F2", CultureInfo.InvariantCulture)%">
+                                        %@Model.Probabilities.Pneumonia.ToString("F2")
+                                    </div>
+                                </div>
+
+                                <small class="text-muted fw-bold">Normal Olasılığı:</small>
+                                <div class="progress" style="height: 22px;">
+                                    <div class="progress-bar bg-success fw-bold"
+                                         role="progressbar"
+                                         style="width: @Model.Probabilities.Normal.ToString("F2", CultureInfo.InvariantCulture)%">
+                                        %@Model.Probabilities.Normal.ToString("F2")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

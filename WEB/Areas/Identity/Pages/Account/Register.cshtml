@@ -1,0 +1,84 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Kayıt Ol";
+}
+
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5 animate__animated animate__fadeInUp">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                @* Kart Başlığı *@
+                <div class="card-header bg-primary text-white text-center py-4 border-0" style="background-color: #0f172a !important;">
+                    <h3 class="fw-bold mb-0"><i class="fas fa-user-plus me-2 text-accent"></i>Yeni Hesap Oluştur</h3>
+                    <p class="text-light-muted small mb-0 mt-2">Medikal Yapay Zeka Tanı Sistemine katılın</p>
+                </div>
+
+                @* Kart İçeriği / Form *@
+                <div class="card-body p-4 p-sm-5 bg-white">
+                    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger small mb-3" role="alert"></div>
+                        
+                        @* 🎯 Ad Girişi *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.FirstName" class="form-control rounded-3" aria-required="true" placeholder="Adınız" />
+                            <label asp-for="Input.FirstName"><i class="fas fa-user me-2 text-muted"></i>Ad</label>
+                            <span asp-validation-for="Input.FirstName" class="text-danger small"></span>
+                        </div>
+
+                        @* 🎯 Soyad Girişi *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.LastName" class="form-control rounded-3" aria-required="true" placeholder="Soyadınız" />
+                            <label asp-for="Input.LastName"><i class="fas fa-user-tag me-2 text-muted"></i>Soyad</label>
+                            <span asp-validation-for="Input.LastName" class="text-danger small"></span>
+                        </div>
+
+                        @* 🎯 Telefon Numarası Girişi *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.PhoneNumber" class="form-control rounded-3" aria-required="true" placeholder="05xx xxx xx xx" />
+                            <label asp-for="Input.PhoneNumber"><i class="fas fa-phone me-2 text-muted"></i>Telefon Numarası</label>
+                            <span asp-validation-for="Input.PhoneNumber" class="text-danger small"></span>
+                        </div>
+                        
+                        @* E-posta Girişi *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Email" class="form-control rounded-3" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                            <label asp-for="Input.Email"><i class="fas fa-envelope me-2 text-muted"></i>E-posta Adresi</label>
+                            <span asp-validation-for="Input.Email" class="text-danger small"></span>
+                        </div>
+                        
+                        @* Şifre Girişi *@
+                        <div class="form-floating mb-3">
+                            <input asp-for="Input.Password" class="form-control rounded-3" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.Password"><i class="fas fa-lock me-2 text-muted"></i>Şifre</label>
+                            <span asp-validation-for="Input.Password" class="text-danger small"></span>
+                        </div>
+                        
+                        @* Şifre Tekrar Girişi *@
+                        <div class="form-floating mb-4">
+                            <input asp-for="Input.ConfirmPassword" class="form-control rounded-3" autocomplete="new-password" aria-required="true" placeholder="password" />
+                            <label asp-for="Input.ConfirmPassword"><i class="fas fa-shield-alt me-2 text-muted"></i>Şifre Tekrar</label>
+                            <span asp-validation-for="Input.ConfirmPassword" class="text-danger small"></span>
+                        </div>
+                        
+                        @* Kayıt Butonu *@
+                        <button id="registerSubmit" type="submit" class="w-100 btn btn-accent btn-lg py-3 rounded-pill fw-bold shadow-sm mb-3">
+                            Hesabımı Oluştur
+                        </button>
+                    </form>
+
+                    <div class="text-center mt-4 border-top pt-3">
+                        <p class="text-muted small mb-0">
+                            Zaten bir hesabınız var mı? 
+                            <a href="/Identity/Account/Login" class="text-accent fw-bold text-decoration-none">Giriş Yapın</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
