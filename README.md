@@ -515,5 +515,5 @@ See the `LICENSE` file for more information.
 ---
 
 <p align="center">
-  <strong>Made with ❤️ using .NET & Python</strong>
+  <strong>Made with  using .NET & Python</strong>
 </p>
