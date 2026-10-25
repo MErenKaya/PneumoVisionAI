@@ -1,4 +1,4 @@
-# 🫁 PneumoVisionAI: Explainable Medical Imaging Pipeline
+# PneumoVisionAI: Explainable Medical Imaging Pipeline
 
 [![.NET](https://img.shields.io/badge/.NET-10.0-512BD4.svg)](https://dotnet.microsoft.com/)
 [![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-MVC-blue.svg)](https://dotnet.microsoft.com/apps/aspnet)
@@ -8,11 +8,11 @@
 
 An AI-powered medical imaging platform designed to analyze Chest X-Rays for pneumonia detection. Built on a strict microservice architecture, it seamlessly integrates a secure **ASP.NET Core MVC** web application with a **Python/FastAPI** deep learning backend, utilizing **PyTorch** and **Grad-CAM** for Explainable AI (XAI).
 
-> ⚠️ **Medical Disclaimer:** Developed for educational and research purposes. Not intended to replace professional medical diagnosis or clinical judgment.
+> **Medical Disclaimer:** Developed for educational and research purposes. Not intended to replace professional medical diagnosis or clinical judgment.
 
 ---
 
-## 🚀 Key Features
+## Key Features
 
 - **Explainable AI (Grad-CAM):** Moves beyond "black-box" predictions. The system generates visual heatmaps highlighting the exact pulmonary regions that contributed to the deep learning model's decision.
 - **Microservice Architecture:** Complete decoupling of the web application (C#) from the AI inference engine (Python). This ensures independent scalability, easier model swapping, and robust environment isolation.
@@ -22,16 +22,16 @@ An AI-powered medical imaging platform designed to analyze Chest X-Rays for pneu
 
 ---
 
-## 📊 Explainability & Visual Results
+## Explainability & Visual Results
 
 Instead of simply returning a binary classification, the AI microservice processes the X-Ray and returns a Grad-CAM heatmap overlay, allowing users to inspect the visual decision-making process.
 
 - **Left:** Original Chest X-Ray Input | **Right:** Grad-CAM Decision Heatmap
-![Grad-CAM Visualization](heatmap_result.jpg)
+![Grad-CAM Visualization](result.png)
 
 ---
 
-## 🛠️ Tech Stack & Architecture
+## Tech Stack & Architecture
 
 **Web Application (Frontend & Backend):**
 - C#, .NET 10, ASP.NET Core MVC
@@ -45,7 +45,7 @@ Instead of simply returning a binary classification, the AI microservice process
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
 - .NET 10 SDK & SQL Server
